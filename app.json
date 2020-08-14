@@ -1,0 +1,25 @@
+{
+  "name": "org-invite-automation",
+  "description": "Inivite memeber to github organization",
+    "repository": "https://github.com/roharon/org-invite-automation",
+  "keywords": [
+      "python",
+      "github",
+      "organization",
+      "automation"
+  ],
+  "env": {
+      "GITHUB_ACCESS_TOKEN": {
+          "description": "https://github.com/settings/tokens",
+          "value": null
+      },
+      "ORGANIZATION_NAME": {
+        "description": "The URL will be : https://github.com/{ORGANIZATION_NAME}"
+      },
+      "JOIN_KEY": {
+        "description": "[Optional] Set the key for join the organization",
+        "value": null,
+        "required": false
+      }
+  }
+}

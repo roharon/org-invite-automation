@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>drive-google-invite</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.3/gh-fork-ribbon.min.css" />
+  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+</head>
+
+<body>
+  <a class="github-fork-ribbon" href="https://github.com/roharon/org-invite-automation" data-ribbon="Fork me on GitHub"
+    title="Fork me on GitHub">Fork me on GitHub</a>
+  <section class="hero is-info is-fullheight">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <div class="column is-6 is-offset-3">
+          <h1 class="title">
+            Join to Github Organization
+          </h1>
+          <h2 class="subtitle" id="org_name">
+            {{ data.org_name }}
+          </h2>
+          <div class="box">
+            <div class="field is-grouped">
+              <p class="control is-expanded has-icons-left">
+                <input class="input is-rounded is-hovered" id="username" placeholder="Your Github username">
+                <span class="icon is-small is-left">
+                  <i class="fa fa-user-circle" aria-hidden="true"></i>
+                </span>
+              </p>
+            </div>
+            <div class="field is-grouped">
+              <p class="control is-expanded has-icons-left">
+                {% if data.join_key == None %}
+                <input class="is-rounded input" disabled type="text" id="code" placeholder="Verify Invite Code">
+                {% else %}
+                <input class="is-rounded input" type="text" id="code" placeholder="Verify Invite Code">
+                {% endif %}
+                <span class="icon is-small is-left">
+                  <i class="fas fa-lock"></i>
+                </span>
+              </p>
+              <p class="control">
+                <button class="button is-info" id="submit" title="submit">Invite</button>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+<script>
+  var username = document.getElementById("username")
+  var code = document.getElementById("code")
+  var submit = document.getElementById("submit")
+
+  var btn_origin_color = submit.style.backgroundColor;
+
+  var click_submit = submit.addEventListener("click", request_submit);
+
+  function request_submit(evt) {
+    evt.preventDefault();
+
+    var data = {
+      username: username.value,
+      join_key: code.value
+    }
+
+    fetch("/add", {
+      method: "PUT",
+      headers: new Headers({
+        "content-type": "application/json"
+      }),
+      body: JSON.stringify(data)
+    })
+      .then(res => res.json())
+      .then(response => {
+        window.location.href = response.org_url;
+      });
+  }
+</script>
+
+</html>
