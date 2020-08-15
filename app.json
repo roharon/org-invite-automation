@@ -18,7 +18,7 @@
       },
       "JOIN_KEY": {
         "description": "[Optional] Set the key for join the organization",
-        "value": null,
+        "value": "",
         "required": false
       }
   }

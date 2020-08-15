@@ -35,8 +35,8 @@
             </div>
             <div class="field is-grouped">
               <p class="control is-expanded has-icons-left">
-                {% if data.join_key == None %}
-                <input class="is-rounded input" disabled type="text" id="code" placeholder="Verify Invite Code">
+                {% if data.join_key == "" %}
+                <input class="is-rounded input" type="text" id="code" placeholder="Verify Invite Code" disabled value="">
                 {% else %}
                 <input class="is-rounded input" type="text" id="code" placeholder="Verify Invite Code">
                 {% endif %}

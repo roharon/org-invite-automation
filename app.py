@@ -10,7 +10,7 @@ app = Flask(__name__)
 def main():
   data = dict(
     org_name=os.environ['ORGANIZATION_NAME'],
-    join_key=None
+    join_key=os.environ['JOIN_KEY']
   )
 
   if "JOIN_KEY" in os.environ:
@@ -21,10 +21,9 @@ def main():
 
 @app.route('/add', methods=['PUT'])
 def add():
-  if "JOIN_KEY" in os.environ:
-    join_key = request.json['join_key']
-    if join_key != os.environ['JOIN_KEY']:
-      return render_template("wrong_key.html")
+  join_key = request.json['join_key']
+  if join_key != os.environ['JOIN_KEY']:
+    return render_template("wrong_key.html")
 
   org_name = os.environ['ORGANIZATION_NAME']
   github_token = os.environ['GITHUB_ACCESS_TOKEN']
